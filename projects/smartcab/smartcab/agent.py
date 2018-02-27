@@ -25,8 +25,6 @@ class LearningAgent(Agent):
         # Set any additional class parameters as needed
         random.seed(247)
         self.t = 0
-        self.pre_count = 300
-        self.end_count = 100
 
 
     def reset(self, destination=None, testing=False):
@@ -47,18 +45,16 @@ class LearningAgent(Agent):
             self.epsilon = 0
             self.alpha = 0
         else:
-            # self.epsilon -= 0.05
-
-
+            self.epsilon -= 0.001
             # if self.epsilon < 0.1 and self.end_count > 0:
             #     self.end_count -= 1
             #     return None
             # if self.epsilon == 1 and self.pre_count > 0:
             #     self.pre_count -= 1
             #     return None
-            self.t += 1
-            # self.epsilon = math.cos(0.002*self.t)
-            self.epsilon *= (1-1e-5)**self.t
+            # self.t += 1
+            # self.epsilon = math.cos(self.alpha*self.t)
+            # self.epsilon *= (0.99999)**self.t
 
         return None
 
@@ -194,7 +190,7 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent,learning=True, alpha=0.09)
+    agent = env.create_agent(LearningAgent,learning=True, alpha=0.5)
     
     ##############
     # Follow the driving agent
@@ -216,7 +212,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=100, tolerance=0.0001)
+    sim.run(n_test=100, tolerance=0.001)
 
 
 if __name__ == '__main__':

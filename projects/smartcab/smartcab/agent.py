@@ -59,7 +59,7 @@ class LearningAgent(Agent):
         return None
 
     def build_state(self):
-        """ The build_state function is called when the agent requests data from the 
+        """ The build_state function is called when the agent requests data from the
             environment. The next waypoint, the intersection inputs, and the deadline 
             are all features available to the agent. """
 
@@ -190,7 +190,7 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent,learning=True, alpha=0.5)
+    agent = env.create_agent(LearningAgent,learning=False, alpha=0.5)
     
     ##############
     # Follow the driving agent
@@ -206,7 +206,7 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     # sim = Simulator(env)
-    sim = Simulator(env, update_delay=0.00001, log_metrics=True, display=False, optimized=True)
+    sim = Simulator(env, update_delay=1, log_metrics=True, display=True, optimized=True)
     ##############
     # Run the simulator
     # Flags:
